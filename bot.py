@@ -11,7 +11,7 @@ def addToLinksIfNeed(r):
         result = json.loads(r.text)
         items = result.get('response', {})
         for item in items:
-            if item.get('acid', '') == '304':
+            if item.get('acid', '') == '306':
                 link = item.get('rsa_exthttpurl', '')
                 links.append(link)
                 print(link)
@@ -29,9 +29,10 @@ def main():
         addToLinksIfNeed(r)
 
     text_file = open("index.html", "w")
-    text_file.write("最後更新: " + str(datetime.datetime.today()))
+    # text_file.write("最後更新: " + str(datetime.datetime.today()) + "</br>")
     for link in links:
-        text_file.write("<a href=\"" + link + "\" target=\"_blank\">" + link + "</a></br>")
+        text_file.write(link + "\n")
+        # text_file.write("<a href=\"" + link + "\" target=\"_blank\">" + link + "</a></br>")
 
     text_file.close()
 

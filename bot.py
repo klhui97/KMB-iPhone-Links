@@ -11,8 +11,8 @@ def addToLinksIfNeed(r):
         result = json.loads(r.text)
         items = result.get('response', {})
         for item in items:
-            if item.get('acid', '') == '306':
-                link = item.get('rsa_exthttpurl', '')
+            link = item.get('rsa_exthttpurl', '')
+            if 'luckdraw' in link:
                 links.append(link)
                 print(link)
                 # r = requests.get(link)

@@ -6,6 +6,7 @@ buses = ['237A', '87S', 'E41', 'N603', '249M', '38P', '215P', 'A31P', '31P', '27
 buses = list(set(buses))
 print(buses)
 links = []
+haveLinksBusNumber = []
 
 def addToLinksIfNeed(r):
     try:
@@ -16,8 +17,9 @@ def addToLinksIfNeed(r):
             if 'luckdraw' in link:
                 links.append(link)
                 print(link)
-                # r = requests.get(link)
-                # print(item.get('rsa_exthttpurl', ''))
+                busNo = result.get('parameter', {}).get('route_bound').split(",")[0]
+                print(busNo)
+                haveLinksBusNumber.append(busNo)
     except:
         print("fail")
     
@@ -34,6 +36,12 @@ def main():
     for link in links:
         text_file.write(link + "\n")
         # text_file.write("<a href=\"" + link + "\" target=\"_blank\">" + link + "</a></br>")
+
+    text_file.close()
+
+    text_file = open("busNo.html", "w")
+    for no in list(set(haveLinksBusNumber)):
+        text_file.write(no + ", ")
 
     text_file.close()
 

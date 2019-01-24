@@ -32,10 +32,10 @@ def main():
         addToLinksIfNeed(r)
 
     text_file = open("index.html", "w")
-    # text_file.write("最後更新: " + str(datetime.datetime.today()) + "</br>")
+    text_file.write("傳說 天神成日開party<br>而每一次 天神都會抽iPhone<br>令每個party都回味無窮但係有一日 天神既iphone無意中落入凡間<br>從此 呢種只係天上有既享受<br>就比人類發現左<br>矜貴 非凡 iPhone<br>最後更新: " + str(datetime.datetime.today()) + "</br>")
     for link in links:
-        text_file.write(link + "\n")
-        # text_file.write("<a href=\"" + link + "\" target=\"_blank\">" + link + "</a></br>")
+        # text_file.write(link + "\n")
+        text_file.write("<a rel=\"noreferrer\" href=\"" + link + "\" target=\"_blank\">" + link + "</a></br>")
 
     text_file.close()
 

@@ -6,6 +6,7 @@ buses = ['237A', '87S', 'E41', 'N603', '249M', '38P', '215P', 'A31P', '31P', '27
 buses = list(set(buses))
 print(buses)
 links = []
+goodLinks = []
 haveLinksBusNumber = []
 
 def addToLinksIfNeed(r):
@@ -20,6 +21,10 @@ def addToLinksIfNeed(r):
                 busNo = result.get('parameter', {}).get('route_bound').split(",")[0]
                 print(busNo)
                 haveLinksBusNumber.append(busNo)
+                
+                if '3051_0' in item.get('thumb', ''):
+                    goodLinks.append(link)
+                    print('Good: ' + link)
     except:
         print("fail")
     
@@ -30,6 +35,14 @@ def main():
         addToLinksIfNeed(r)
         r = requests.get('https://app1933.kmb.hk/kmb_v2_webservice/api.php?lang=tc&version=3&platform=ios_12.1.2&deviceid=672815fc1d196fd5234621234ab313f7md&model=iPhone10,2&rand=1548069114&action=getbusstopad&route_bound=' + bus + ',2')
         addToLinksIfNeed(r)
+
+    text_file = open("good.html", "w")
+    text_file.write("傳說 天神成日開party<br>而每一次 天神都會抽iPhone<br>令每個party都回味無窮但係有一日 天神既iphone無意中落入凡間<br>從此 呢種只係天上有既享受<br>就比人類發現左<br>矜貴 非凡 iPhone<br>最後更新: " + str(datetime.datetime.today()) + "</br>")
+    for link in goodLinks:
+        # text_file.write(link + "\n")
+        text_file.write("<a rel=\"noreferrer\" href=\"" + link + "\" target=\"_blank\">" + link + "</a></br>")
+
+    text_file.close()
 
     text_file = open("index.html", "w")
     text_file.write("傳說 天神成日開party<br>而每一次 天神都會抽iPhone<br>令每個party都回味無窮但係有一日 天神既iphone無意中落入凡間<br>從此 呢種只係天上有既享受<br>就比人類發現左<br>矜貴 非凡 iPhone<br>最後更新: " + str(datetime.datetime.today()) + "</br>")

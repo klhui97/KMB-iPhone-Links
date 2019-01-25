@@ -13,18 +13,24 @@ def addToLinksIfNeed(r):
     try:
         result = json.loads(r.text)
         items = result.get('response', {})
+        stop_codes = []
+        busNo = result.get('parameter', {}).get('route_bound').split(",")[0]
+        print(busNo)
+        if busNo == "73":
+            print("73 is here")
         for item in items:
+            stop_code = item.get('stop_code', '')
             link = item.get('rsa_exthttpurl', '')
-            if 'luckdraw' in link:
+            if 'luckdraw' in link and stop_code not in stop_codes:
                 links.append(link)
-                print(link)
-                busNo = result.get('parameter', {}).get('route_bound').split(",")[0]
-                print(busNo)
+                print('Normal: ' + link)
+                
                 haveLinksBusNumber.append(busNo)
                 
                 if '3051_0' in item.get('thumb', ''):
                     goodLinks.append(link)
                     print('Good: ' + link)
+            stop_codes.append(stop_code)
     except:
         print("fail")
     
@@ -37,7 +43,7 @@ def main():
         addToLinksIfNeed(r)
 
     text_file = open("good.html", "w")
-    text_file.write("傳說 天神成日開party<br>而每一次 天神都會抽iPhone<br>令每個party都回味無窮但係有一日 天神既iphone無意中落入凡間<br>從此 呢種只係天上有既享受<br>就比人類發現左<br>矜貴 非凡 iPhone<br>最後更新: " + str(datetime.datetime.today()) + "</br>")
+    text_file.write("<head><meta charset=\"UTF-8\"></head>傳說 天神成日開party<br>而每一次 天神都會抽iPhone<br>令每個party都回味無窮但係有一日 天神既iphone無意中落入凡間<br>從此 呢種只係天上有既享受<br>就比人類發現左<br>矜貴 非凡 iPhone<br>最後更新: " + str(datetime.datetime.today()) + "</br>")
     for link in goodLinks:
         # text_file.write(link + "\n")
         text_file.write("<a rel=\"noreferrer\" href=\"" + link + "\" target=\"_blank\">" + link + "</a></br>")
@@ -45,7 +51,7 @@ def main():
     text_file.close()
 
     text_file = open("index.html", "w")
-    text_file.write("傳說 天神成日開party<br>而每一次 天神都會抽iPhone<br>令每個party都回味無窮但係有一日 天神既iphone無意中落入凡間<br>從此 呢種只係天上有既享受<br>就比人類發現左<br>矜貴 非凡 iPhone<br>最後更新: " + str(datetime.datetime.today()) + "</br>")
+    text_file.write("<head><meta charset=\"UTF-8\"></head>傳說 天神成日開party<br>而每一次 天神都會抽iPhone<br>令每個party都回味無窮但係有一日 天神既iphone無意中落入凡間<br>從此 呢種只係天上有既享受<br>就比人類發現左<br>矜貴 非凡 iPhone<br>最後更新: " + str(datetime.datetime.today()) + "</br>")
     for link in links:
         # text_file.write(link + "\n")
         text_file.write("<a rel=\"noreferrer\" href=\"" + link + "\" target=\"_blank\">" + link + "</a></br>")

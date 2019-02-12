@@ -1,4 +1,5 @@
 # KMB-iPhone-Links
+For KMB events from 21-01-2019 to 30-01-2019
 
 ## How to use?
 ```
